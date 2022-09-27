@@ -18,6 +18,9 @@ namespace ListFootball
             InitConnexion();
         }
 
+        /// <summary>
+        /// Method used to create a connection to the DataBase
+        /// </summary>
         private void InitConnexion()
         {
             // connection string creation : contact the DB server
@@ -25,24 +28,27 @@ namespace ListFootball
             connection = new MariaDBConnection(connectionString);
         }
 
+        /// <summary>
+        /// Method useed to add a new player into the database
+        /// </summary>
+        /// <param name="player">The player to add</param>
         public void AddPlayer(Player player)
         {
             try
             {
                 connection.Open();
 
-                MariaDBCommand command = connection.CreateCommand();
+                MariaDBCommand cmdAdd = connection.CreateCommand();
+
+                cmdAdd.CommandText = "INSERT INTO players (firstName, lastName, phoneNumber) VALUES (@firstName, @lastName, @phoneNumber)";
 
 
-                command.CommandText = "INSERT INTO players (firstName, lastName, phoneNumber) VALUES (@firstName, @lastName, @phoneNumber)";
+                cmdAdd.Parameters.AddWithValue("@firstName", player.FirstName);
+                cmdAdd.Parameters.AddWithValue("@lastName", player.LastName);
+                cmdAdd.Parameters.AddWithValue("@phoneNumber", player.PhoneNumber);
 
 
-                command.Parameters.AddWithValue("@firstName", player.FirstName);
-                command.Parameters.AddWithValue("@lastName", player.LastName);
-                command.Parameters.AddWithValue("@phoneNumber", player.PhoneNumber);
-
-
-                command.ExecuteNonQuery();
+                cmdAdd.ExecuteNonQuery();
 
                 connection.Close();
             }
@@ -50,6 +56,14 @@ namespace ListFootball
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Method used to retrieve the entire player list stored in the DB
+        /// </summary>
+        public void GetPlayersList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

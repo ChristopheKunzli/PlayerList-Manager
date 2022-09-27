@@ -2,27 +2,21 @@ namespace ListFootball
 {
     public partial class FrmList : Form
     {
-        //private List<Player> players = new List<Player>();
-        ConnectionDB connection = new ConnectionDB();
+        private ConnectionDB connection = new ConnectionDB();
 
         public FrmList()
         {
             InitializeComponent();
-            
-            AddPlayerToList(new Player("Sam", "Chatouille", "0781564545"));
         }
 
         private void AddPlayerToList(Player player)
         {
-            //players.Add(player);
-            //lstPlayerList.Items.Add(player.FirstName + " " + player.LastName);
             lstPlayerList.Items.Add(player);
             connection.AddPlayer(player);
         }
 
         private void RemovePlayerFromList(int index)
         {
-            //players.RemoveAt(index);
             lstPlayerList.Items.RemoveAt(index);
         }
 
