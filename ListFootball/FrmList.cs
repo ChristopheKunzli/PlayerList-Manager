@@ -34,7 +34,6 @@ namespace ListFootball
         {
             if (lstPlayerList.SelectedItems.Count > 0)
             {
-
                 Player selectedPlayer = (Player) lstPlayerList.SelectedItem;
                 FrmAdd form = new FrmAdd(selectedPlayer);
 

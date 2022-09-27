@@ -59,6 +59,16 @@ namespace ListFootball
         }
 
         /// <summary>
+        /// Method used to remove a specific player from the DB
+        /// </summary>
+        /// <param name="player"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void RemovePlayer(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Method used to retrieve the entire player list stored in the DB
         /// </summary>
         public void GetPlayersList()
