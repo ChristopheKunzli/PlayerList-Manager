@@ -17,7 +17,10 @@ namespace ListFootball
 
         private void RemovePlayerFromList(int index)
         {
+            Player selectedPlayer = (Player)lstPlayerList.SelectedItem;
+            
             lstPlayerList.Items.RemoveAt(index);
+            connection.RemovePlayer(selectedPlayer);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

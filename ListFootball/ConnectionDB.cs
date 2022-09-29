@@ -65,7 +65,26 @@ namespace ListFootball
         /// <exception cref="NotImplementedException"></exception>
         public void RemovePlayer(Player player)
         {
-            throw new NotImplementedException();
+            try
+            {
+                connection.Open();
+
+                MariaDBCommand cmdDelete = connection.CreateCommand();
+
+                cmdDelete.CommandText = "DELETE FROM players WHERE firstName = @firstName AND lastName = @lastName AND phoneNumber = @phoneNumber";
+
+                cmdDelete.Parameters.AddWithValue("@firstName", player.FirstName);
+                cmdDelete.Parameters.AddWithValue("@lastName", player.LastName);
+                cmdDelete.Parameters.AddWithValue("@phoneNumber", player.PhoneNumber);
+
+                cmdDelete.ExecuteNonQuery();
+
+                connection.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
