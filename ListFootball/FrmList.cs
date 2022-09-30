@@ -7,6 +7,11 @@ namespace ListFootball
         public FrmList()
         {
             InitializeComponent();
+            List<Player> players = connection.GetPlayersList();
+            foreach(Player p in players)
+            {
+                lstPlayerList.Items.Add(p);
+            }
         }
 
         private void AddPlayerToList(Player player)

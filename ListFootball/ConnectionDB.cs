@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.CData.MariaDB;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,9 +92,41 @@ namespace ListFootball
         /// <summary>
         /// Method used to retrieve the entire player list stored in the DB
         /// </summary>
-        public void GetPlayersList()
+        public List<Player> GetPlayersList()
         {
-            throw new NotImplementedException();
+            List<Player> list = new List<Player>();
+
+            try
+            {
+                MariaDBCommand commandGet = connection.CreateCommand();
+
+                commandGet.CommandText = "SELECT firstName, lastName, phoneNumber FROM players";
+
+                /**
+                DataTable batch = new DataTable();
+
+                batch.Columns.Add("firstName");
+                batch.Columns.Add("lastName");
+                batch.Columns.Add("phoneNumber");
+
+                
+                batch.Load(commandGet.ExecuteReader());
+                **/
+
+                MariaDBDataReader dataReader = commandGet.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    list.Add(new Player(dataReader["firstName"].ToString(), dataReader["LastName"].ToString(), dataReader["phoneNumber"].ToString()));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return list;
         }
     }
 }
