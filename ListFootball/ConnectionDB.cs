@@ -102,17 +102,6 @@ namespace ListFootball
 
                 commandGet.CommandText = "SELECT firstName, lastName, phoneNumber FROM players";
 
-                /**
-                DataTable batch = new DataTable();
-
-                batch.Columns.Add("firstName");
-                batch.Columns.Add("lastName");
-                batch.Columns.Add("phoneNumber");
-
-                
-                batch.Load(commandGet.ExecuteReader());
-                **/
-
                 MariaDBDataReader dataReader = commandGet.ExecuteReader();
 
                 while (dataReader.Read())
